@@ -1,0 +1,16 @@
+{
+  "name": "prompt-battle",
+  "version": "1.0.0",
+  "description": "promptBattle for Rundgang 2024 @[]groundzero",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "node-fetch": "^2",
+    "socket.io": "^4.7.5"
+  }
+}

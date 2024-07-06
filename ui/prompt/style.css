@@ -1,0 +1,194 @@
+@font-face {
+  font-family: 'meyrin';
+  src: url('/meyrin.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'speedway';
+  src: url('/speedway.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.meyrin {
+  font-family: 'meyrin';
+  text-transform: uppercase;
+}
+
+.speedway {
+  font-family: 'speedway';
+  text-transform: uppercase;
+}
+
+::selection {
+  color: white;
+  background-color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0em;
+}
+
+button {
+  padding: 0;
+  font-family: 'meyrin';
+  font-size: 0.75em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+}
+
+body {
+  --primary-color: white;
+  --h: calc(calc(100vh - 50vw) / 2);
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  color: var(--primary-color);
+  background: black;
+}
+
+input, textarea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  width: 70%;
+  margin: 0;
+  padding: 5rem;
+  font-family: Arial, sans-serif;
+  font-size: 2em;
+  color: white;
+  border: 0;
+  outline: 0;
+  border-radius: 8vw;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* prompt */
+
+#input-name {
+  text-align: center;
+}
+
+#input-prompt {
+  display: none;
+  height: 60vh;
+  text-align: center;
+}
+
+/* prompts */
+
+#countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: var(--primary-color);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+#instruction {
+  position: absolute;
+  width: fit-content;
+  max-width: 35vw;
+  text-align: center;
+  transform: translateX(-50%) translateY(-50%);
+  color: black;
+  background: white;
+}
+
+header, footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--h);
+  gap: 0.5em;
+}
+
+header, #countdown {
+  font-size: 2em;
+}
+
+main {
+  display: flex;
+  width: 100%;
+  height: 50vw;
+}
+
+main > div {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  max-width: 50vw;
+  text-align: right;
+  background: linear-gradient(-90deg, blue, black);
+}
+
+main > div:first-of-type {
+  text-align: left;
+  background: linear-gradient(90deg, red, black);
+}
+
+main > div:first-of-type .prompt {
+  text-align: left;
+  background: linear-gradient(90deg, red, black);
+  padding: 1.5vw 3vw 1.5vw 1.5vw;
+}
+
+main > div:first-of-type .name {
+  flex-direction: row;
+}
+
+main .name {
+  display: flex;
+  flex-direction: row-reverse;
+  line-height: var(--h);
+  margin: calc(var(--h) * -1) 0 0 0;
+  padding: 0 1.5vw;
+  cursor: pointer;
+  user-select: none;
+  gap: 0.5em;
+}
+
+main .prompt {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  width: 100%;
+  height: 50vw;
+  padding: 1.5vw 1.5vw 1.5vw 3vw;
+}
+
+main img {
+  position: absolute;
+  height: 50vw;
+  width: 50vw;
+}
