@@ -5,7 +5,7 @@ import threading
 
 from generation import AIWrapper
 
-wrapper = AIWrapper()
+wrapper = AIWrapper(model_name="stabilityai/stable-diffusion-xl-base-1.0")
 app = Flask(__name__)
 
 queue_lock = threading.Lock()
@@ -13,7 +13,7 @@ queue_lock = threading.Lock()
 def prompting(input_text):
     timestamp = int(time.time())
     image_path = f'static/images/{timestamp}.png'
-    wrapper.txt2img(input_text).save(image_path)
+    wrapper.txt2img(input_text, num_inference_steps=15, guidance_scale=9).save(image_path)
     return image_path
 
 @app.route('/prompt/<input_text>', methods=['GET'])

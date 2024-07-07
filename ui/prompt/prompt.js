@@ -1,3 +1,5 @@
+let countdown = 60
+
 const socket = io()
 console.log(socket)
 
@@ -13,7 +15,7 @@ socket.on('state', (state) => {
   document.querySelector('body').style.background = `linear-gradient(360deg, blue, black)`
   }
 
-  if (state.countdown === 30 || state.countdown === 0) {
+  if (state.countdown === countdown || state.countdown === 0) {
     console.log("disable prompt")
     document.querySelector('#input-prompt').disabled = true
     document.querySelector('#input-prompt').style.cursor = 'not-allowed'

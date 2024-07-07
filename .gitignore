@@ -1,8 +1,11 @@
 .DS_Store
 node_modules
 .env
+.wav
+__pycache__
+
 
 ai/static
 *.woff
-instructions.json
-instructions-nsfw.json
+*.json
+history.txt

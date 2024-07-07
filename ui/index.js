@@ -9,9 +9,13 @@ const app = express()
 const server = createServer(app)
 const io = new Server(server)
 
+let countdown = 60
+
+let instructionCounter = 0
+
 const state = {
   round: -1, 
-  countdown: 30,
+  countdown: countdown,
   players: [],
   instruction: ''
 }
@@ -42,8 +46,16 @@ async function prompt() {
 
 function battle() {
   state.round = state.round + 1
-  state.countdown = 30
-  state.instruction = instructions[Math.floor(Math.random() * instructions.length)]
+  state.countdown = countdown
+
+  //state.instruction = instructions[Math.floor(Math.random() * instructions.length)]
+
+  state.instruction = instructions[instructionCounter]
+  instructionCounter++
+  if(instructionCounter === instructions.length){
+    shuffleInstructions()
+    instructionCounter = 0
+  }
 
   const iv = setInterval(() => {
     if (state.countdown === 0) {
@@ -54,11 +66,14 @@ function battle() {
     }
     io.emit('state', state)
   }, 1000)
+
+
+
 }
 
 function reset() {
   state.round = -1
-  state.countdown = 30
+  state.countdown = countdown
   state.players = []
   state.instruction = ''
 }
@@ -84,7 +99,7 @@ io.on('connection', (socket) => {
     if (value === 'reset') {
       reset()
     } else if (value === 'start') {
-      if ((state.countdown !== 0 && state.countdown !== 30) || state.players.length !== 2) return
+      if ((state.countdown !== 0 && state.countdown !== countdown) || state.players.length !== 2) return
       battle()
     }
     io.emit('state', state)
@@ -122,6 +137,11 @@ io.on('connection', (socket) => {
   })
 })
 
+function shuffleInstructions(){
+  instructions.sort(() => Math.random() - 0.5);
+}
+
 server.listen(3000, () => {
   console.log('prompting at http://localhost:3000')
+  shuffleInstructions()
 })

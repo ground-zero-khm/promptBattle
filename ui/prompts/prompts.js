@@ -1,3 +1,5 @@
+let countdown = 60
+
 const socket = io()
 let stick = true
 
@@ -28,24 +30,41 @@ socket.on('state', (state) => {
         <p class="name" data-name="${p.name}"><span>${p.name}</span> <span>${
         p.score ? Array(p.score).fill('⭐️').join('') : ''
       }</span></p>
-        <p class="prompt">${p.prompts[state.round] ? p.prompts[state.round] : ''}</p>
+        <p class="${p.results[state.round] ? 'single-prompt' : 'prompt'}">${p.prompts[state.round] ? p.prompts[state.round] : ''}</p>
       </div>
   `
     })
     .join('')
+
+    state.players.forEach((p) => {
+      if (p.results[state.round]) {
+        document.querySelector('.loader').style.display = 'none'
+      } else if (state.countdown === 0) {
+        document.querySelector('.loader').style.display = 'block'
+      }
+    })
 
   document.querySelector('#instruction').innerHTML = state.instruction.startsWith('http')
     ? `<img src="${state.instruction}"/>`
     : `<p>${state.instruction}</p>`
 
   document.querySelector('#countdown').innerHTML =
-    state.countdown === 0 || state.countdown === 30 ? '' : state.countdown
+    state.countdown === 0 || state.countdown === countdown ? '' : state.countdown
 
   document.querySelector('#title').innerHTML =
     state.round === -1 ? `prompt [] battle` : `prompt [${state.round}] battle`
 
   document.querySelectorAll('.name').forEach((e) => {
     e.addEventListener('click', (event) => {
+
+      // Left and Right
+      let index = Array.from(e.parentElement.parentElement.children).indexOf(e.parentElement);
+      if (index === 0) {
+        celebrate_left()
+      } else {
+        celebrate_right()
+      }
+
       socket.emit('score', e.dataset.name)
     })
   })

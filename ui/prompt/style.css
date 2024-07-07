@@ -123,6 +123,13 @@ input, textarea {
   transform: translateX(-50%) translateY(-50%);
   color: black;
   background: white;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+#instruction img {
+  width: calc(35vw / 2);
+  margin: auto;
 }
 
 header, footer {
@@ -130,10 +137,11 @@ header, footer {
   justify-content: center;
   align-items: center;
   height: var(--h);
+  font-size: 1.25em;
   gap: 0.5em;
 }
 
-header, #countdown {
+#countdown {
   font-size: 2em;
 }
 
@@ -186,9 +194,50 @@ main .prompt {
   height: 50vw;
   padding: 1.5vw 1.5vw 1.5vw 3vw;
 }
-
+main .single-prompt {
+  position: absolute;
+  bottom: 7vw;
+  font-size: 20px;
+  text-align: center;
+  width: 50%;
+}
 main img {
   position: absolute;
-  height: 50vw;
-  width: 50vw;
+  height: 35vw;
+  width: 35vw;
+  margin: calc(15vw / 2);
+  margin-top: 5vw;
 }
+
+#konfetti {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  display: none;
+}
+
+  @keyframes rotation {
+  0% {
+      transform: translate(-50%, -50%) rotate(0deg) ;
+  }
+  100% {
+      transform:  translate(-50%, -50%) rotate(360deg);
+  }
+  } 
